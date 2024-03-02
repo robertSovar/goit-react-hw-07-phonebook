@@ -19,17 +19,6 @@ const App = () => {
   const filter = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const data = localStorage.getItem("contact");
-    if (data) {
-      dispatch(saveContacts(JSON.parse(data)));
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    localStorage.setItem("contact", JSON.stringify(contacts));
-  }, [contacts]);
-
   const formSubmit = (name, number) => {
     const noCapitalName = name.toLowerCase();
     const existingContact = contacts.some(

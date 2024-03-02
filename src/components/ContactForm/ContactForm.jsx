@@ -32,7 +32,6 @@ const ContactForm = ({ onAddContact }) => {
         value={name}
         onChange={handleChange}
         placeholder="Name"
-        pattern="^[a-zA-Z]+(([' -][a-zA-Z ])?[a-zA-Z]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
       />
@@ -44,7 +43,6 @@ const ContactForm = ({ onAddContact }) => {
         value={number}
         onChange={handleChange}
         placeholder="Number"
-        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
       />
