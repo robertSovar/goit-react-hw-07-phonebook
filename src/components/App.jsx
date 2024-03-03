@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  saveContacts,
   selectContacts,
-  addContact,
-  deleteContact,
+  fetchContact,
+  addContacts,
+  deleteContacts,
 } from "../redux/slices/contactsSlice";
 import { setFilter } from "../redux/slices/filterSlice";
 import ContactForm from "./ContactForm/ContactForm";
@@ -19,7 +19,7 @@ const App = () => {
   const filter = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
-  const formSubmit = (name, number) => {
+  const formSubmit = (name, phone) => {
     const noCapitalName = name.toLowerCase();
     const existingContact = contacts.some(
       (contact) => contact.name.toLowerCase() === noCapitalName
@@ -32,25 +32,18 @@ const App = () => {
     const contact = {
       id: nanoid(),
       name,
-      number,
+      phone,
     };
 
-    dispatch(addContact(contact));
+    dispatch(addContacts(contact));
   };
 
   const changeFilterInput = (e) => {
     dispatch(setFilter(e.target.value));
   };
 
-  const findContacts = () => {
-    const lowercaseFilter = filter.toLowerCase();
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(lowercaseFilter)
-    );
-  };
-
   const handleDeleteContact = (id) => {
-    dispatch(deleteContact(id));
+    dispatch(deleteContacts(id));
   };
 
   return (
@@ -59,10 +52,7 @@ const App = () => {
       <ContactForm onAddContact={formSubmit} />
       <h2>Contacts</h2>
       <Filter filter={filter} changeFilterInput={changeFilterInput} />
-      <ContactList
-        contacts={findContacts()}
-        deleteContact={handleDeleteContact}
-      />
+      <ContactList deleteContact={handleDeleteContact} />
     </section>
   );
 };
