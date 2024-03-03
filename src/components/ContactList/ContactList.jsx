@@ -1,17 +1,14 @@
 import styles from "../ContactList/ContactList.module.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteContacts,
-  fetchContact,
-  selectContacts,
-} from "../../redux/slices/contactsSlice";
+import { deleteContacts, fetchContact } from "../../redux/slices/contactsSlice";
 import ContactItem from "../ContactItem/ContactItem";
+import { selectFilteredContacts } from "../../redux/selectors";
 
 const ContactList = () => {
-  const contacts = useSelector(selectContacts);
-  const error = useSelector((state) => state.contacts.error);
-  const isLoading = useSelector((state) => state.contacts.isLoading);
+  const contacts = useSelector(selectFilteredContacts);
+  const error = useSelector((state) => state.error);
+  const isLoading = useSelector((state) => state.isLoading);
 
   const dispatch = useDispatch();
 
@@ -24,17 +21,25 @@ const ContactList = () => {
   };
 
   return (
-    <ul className={styles.contactListSection}>
-      {contacts.map((contact) => {
-        return (
-          <ContactItem
-            key={contact.id}
-            contact={contact}
-            onDeleteContact={handleDeleteContact}
-          />
-        );
-      })}
-    </ul>
+    <div>
+      {isLoading && <Loader />}
+      {!isLoading && !error && (
+        <ul className={styles.contactListSection}>
+          {contacts && contacts.length > 0 ? (
+            contacts.map((contact) => (
+              <ContactItem
+                key={contact.id}
+                contact={contact}
+                onDeleteContact={handleDeleteContact}
+              />
+            ))
+          ) : (
+            <p>No contacts available.</p>
+          )}
+        </ul>
+      )}
+      {error && <p> An error has occured while fetching contacts</p>}
+    </div>
   );
 };
 

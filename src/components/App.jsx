@@ -1,14 +1,8 @@
 // App.js
-import React, { useEffect } from "react";
+import React from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  selectContacts,
-  fetchContact,
-  addContacts,
-  deleteContacts,
-} from "../redux/slices/contactsSlice";
-import { setFilter } from "../redux/slices/filterSlice";
+import { selectContacts, addContacts } from "../redux/slices/contactsSlice";
 import ContactForm from "./ContactForm/ContactForm";
 import ContactList from "./ContactList/ContactList";
 import Filter from "./Filter/Filter";
@@ -16,7 +10,6 @@ import styles from "./App.module.css";
 
 const App = () => {
   const contacts = useSelector(selectContacts);
-  const filter = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
   const formSubmit = (name, phone) => {
@@ -38,21 +31,13 @@ const App = () => {
     dispatch(addContacts(contact));
   };
 
-  const changeFilterInput = (e) => {
-    dispatch(setFilter(e.target.value));
-  };
-
-  const handleDeleteContact = (id) => {
-    dispatch(deleteContacts(id));
-  };
-
   return (
     <section className={styles.mainSection}>
       <h1>Phonebook</h1>
       <ContactForm onAddContact={formSubmit} />
       <h2>Contacts</h2>
-      <Filter filter={filter} changeFilterInput={changeFilterInput} />
-      <ContactList deleteContact={handleDeleteContact} />
+      <Filter />
+      <ContactList />
     </section>
   );
 };
