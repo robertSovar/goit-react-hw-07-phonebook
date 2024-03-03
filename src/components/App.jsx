@@ -2,11 +2,12 @@
 import React from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
-import { selectContacts, addContacts } from "../redux/slices/contactsSlice";
+import { addContacts } from "../redux/operations";
 import ContactForm from "./ContactForm/ContactForm";
 import ContactList from "./ContactList/ContactList";
 import Filter from "./Filter/Filter";
 import styles from "./App.module.css";
+import { selectContacts } from "../redux/slices/contactsSlice";
 
 const App = () => {
   const contacts = useSelector(selectContacts);

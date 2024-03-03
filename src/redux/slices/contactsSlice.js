@@ -1,32 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import contactsService from "../service/contactsService";
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchContact, addContacts, deleteContacts } from "../operations";
 
 const initialState = {
   items: [],
   isLoading: false,
   error: null,
 };
-
-export const fetchContact = createAsyncThunk(
-  "contacts/fetchContacts",
-  async () => {
-    return contactsService.get();
-  }
-);
-
-export const addContacts = createAsyncThunk(
-  "contacts/addContacts",
-  async (initialPost) => {
-    return contactsService.create(initialPost);
-  }
-);
-
-export const deleteContacts = createAsyncThunk(
-  "contacts/deleteContacts",
-  async (initialPost) => {
-    return contactsService.remove(initialPost);
-  }
-);
 
 const contactsSlice = createSlice({
   name: "contacts",
