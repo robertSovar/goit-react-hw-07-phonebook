@@ -6,11 +6,12 @@ import {
   fetchContact,
   selectContacts,
 } from "../../redux/slices/contactsSlice";
+import ContactItem from "../ContactItem/ContactItem";
 
 const ContactList = () => {
   const contacts = useSelector(selectContacts);
-  // const error = useSelector((state) => state.contacts.error);
-  // const isLoading = useSelector((state) => state.contacts.isLoading);
+  const error = useSelector((state) => state.contacts.error);
+  const isLoading = useSelector((state) => state.contacts.isLoading);
 
   const dispatch = useDispatch();
 
@@ -26,18 +27,11 @@ const ContactList = () => {
     <ul className={styles.contactListSection}>
       {contacts.map((contact) => {
         return (
-          <li key={contact.id} className={styles.contactList}>
-            <p>
-              {contact.name}: {contact.phone}
-            </p>
-            <button
-              type="button"
-              onClick={() => handleDeleteContact(id)}
-              className={styles.button}
-            >
-              Delete
-            </button>
-          </li>
+          <ContactItem
+            key={contact.id}
+            contact={contact}
+            onDeleteContact={handleDeleteContact}
+          />
         );
       })}
     </ul>

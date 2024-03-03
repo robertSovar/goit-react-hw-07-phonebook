@@ -7,8 +7,8 @@
 .contactList {
   display: flex;
   gap: 25px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding: 15px;
   font-size: 20px;
   border: 1px dotted rgb(184, 120, 120);
@@ -25,4 +25,8 @@
   padding: 2px 25px;
   color: white;
   font-size: 15px;
+}
+
+.button:hover {
+  scale: 1.1;
 }
