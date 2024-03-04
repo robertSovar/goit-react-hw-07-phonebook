@@ -14,6 +14,7 @@ async function create(contact) {
 
 async function remove(contactId) {
   const response = await axios.delete(`/contacts/${contactId}`);
+  return response.data;
 }
 
 const contactsService = {

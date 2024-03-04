@@ -4,20 +4,20 @@ import contactsService from "./service/contactsService";
 export const fetchContact = createAsyncThunk(
   "contacts/fetchContacts",
   async () => {
-    return contactsService.get();
+    return await contactsService.get();
   }
 );
 
 export const addContacts = createAsyncThunk(
   "contacts/addContacts",
   async (initialPost) => {
-    return contactsService.create(initialPost);
+    return await contactsService.create(initialPost);
   }
 );
 
 export const deleteContacts = createAsyncThunk(
   "contacts/deleteContacts",
   async (initialPost) => {
-    return contactsService.remove(initialPost);
+    return await contactsService.remove(initialPost);
   }
 );
