@@ -28,6 +28,9 @@ const contactsSlice = createSlice({
       })
 
       // Create
+      .addCase(addContacts.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(addContacts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.items.push(action.payload);

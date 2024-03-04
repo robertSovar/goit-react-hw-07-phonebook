@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteContacts, fetchContact } from "../../redux/operations";
 import ContactItem from "../ContactItem/ContactItem";
 import { selectFilteredContacts } from "../../redux/selectors";
+import { Loader } from "../Loader/Loader";
 
 const ContactList = () => {
   const contacts = useSelector(selectFilteredContacts);
